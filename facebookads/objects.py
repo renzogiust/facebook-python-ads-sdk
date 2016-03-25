@@ -1923,8 +1923,11 @@ class AdVideo(AbstractCrudObject):
                 'duration_ms': self[self.Field.slideshow_spec]['duration_ms'],
                 'transition_ms': self[self.Field.slideshow_spec]['transition_ms'],
             }})
-            request.send((self.get_parent_id_assured(), 'advideos'))
-            exit()
+            response = request.send((self.get_parent_id_assured(), 'advideos'))
+            self._set_data({'id': json.loads(response._body)['id']})
+            return json.loads(response._body)['id']
+
+
         elif not (self.Field.filepath in self):
             raise FacebookBadObjectError(
                 "AdVideo requires a filepath or slideshow_spec to be defined.",
