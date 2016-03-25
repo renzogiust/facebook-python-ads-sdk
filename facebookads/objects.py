@@ -1927,7 +1927,6 @@ class AdVideo(AbstractCrudObject):
             self._set_data({'id': json.loads(response._body)['id']})
             return json.loads(response._body)['id']
 
-
         elif not (self.Field.filepath in self):
             raise FacebookBadObjectError(
                 "AdVideo requires a filepath or slideshow_spec to be defined.",
